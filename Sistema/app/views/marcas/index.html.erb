@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Marcas</h1>
+                      <!-- formulario de busqueda -->
+  <%= form_tag marcas_path, method: :get do %>
+      <div class="form-group">
+          <%= text_field_tag :marca_descrip, params[:marca_descrip], class: "form-control", placeholder: "Descripcion" %>
+      </div>
+      <%= submit_tag "Buscar", name: nil, class: "btn btn-primary btn-md" %>
+  <% end %>
+                      <!-- fin formulario de busqueda -->
+<table>
+  <thead>
+    <tr>
+      <th>Marca descrip</th>
+      <th>Marca active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @marcas.each do |marca| %>
+      <tr>
+        <td><%= marca.marca_descrip %></td>
+        <td><%= marca.marca_active %></td>
+        <td><%= link_to 'Show', marca %></td>
+        <td><%= link_to 'Edit', edit_marca_path(marca) %></td>
+        <td><%= link_to 'Destroy', marca, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Marca', new_marca_path %>

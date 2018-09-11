@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: marcas
+#
+#  id            :bigint(8)        not null, primary key
+#  marca_active  :boolean
+#  marca_descrip :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marca_descrip: MyString
+  marca_active: false
+
+two:
+  marca_descrip: MyString
+  marca_active: false

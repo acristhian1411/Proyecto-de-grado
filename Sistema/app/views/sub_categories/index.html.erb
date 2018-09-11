@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sub Categories</h1>
+                      <!-- formulario de busqueda -->
+  <%= form_tag sub_categories_path, method: :get do %>
+      <div class="form-group">
+          <%= text_field_tag :sub_categ_descrip, params[:sub_categ_descrip], class: "form-control", placeholder: "Descripcion" %>
+      </div>
+      <%= submit_tag "Buscar", name: nil, class: "btn btn-primary btn-md" %>
+  <% end %>
+                      <!-- fin formulario de busqueda -->
+<table>
+  <thead>
+    <tr>
+      <th>Sub categ descrip</th>
+      <th>Sub categ active</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sub_categories.each do |sub_category| %>
+      <tr>
+        <td><%= sub_category.sub_categ_descrip %></td>
+        <td><%= sub_category.sub_categ_active %></td>
+        <td><%= sub_category.category %></td>
+        <td><%= link_to 'Show', sub_category %></td>
+        <td><%= link_to 'Edit', edit_sub_category_path(sub_category) %></td>
+        <td><%= link_to 'Destroy', sub_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sub Category', new_sub_category_path %>
