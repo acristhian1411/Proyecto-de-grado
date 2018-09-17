@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'stock/index'
+  get 'home/inicio'
+  root 'home#inicio'
+  devise_for :users
+  resources :sucursales
+  resources :productos
+  resources :proveedores
   resources :marcas
   resources :sub_categories
   resources :categories

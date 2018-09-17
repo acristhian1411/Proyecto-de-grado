@@ -1,10 +1,14 @@
 class SubCategoriesController < ApplicationController
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
 
   # GET /sub_categories
   # GET /sub_categories.json
   def index
-    @sub_categories = SubCategory.all
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @category = Category.where("category_active != false")
+    
     if params[:sub_categ_descrip].present?
         @sub_categories = @sub_categories.where("sub_categ_descrip ILIKE ?", "%#{params[:sub_categ_descrip]}%")
     end
@@ -13,25 +17,31 @@ class SubCategoriesController < ApplicationController
   # GET /sub_categories/1
   # GET /sub_categories/1.json
   def show
+    @category = Category..where("category_active != false")
   end
 
   # GET /sub_categories/new
   def new
     @sub_category = SubCategory.new
+    @category = Category.where("category_active != false")
+
   end
 
   # GET /sub_categories/1/edit
   def edit
+    @category = Category.where("category_active != false")
+
   end
 
   # POST /sub_categories
   # POST /sub_categories.json
   def create
+    @category = Category.where("category_active != false")
     @sub_category = SubCategory.new(sub_category_params)
 
     respond_to do |format|
       if @sub_category.save
-        format.html { redirect_to @sub_category, notice: 'Sub category was successfully created.' }
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :created, location: @sub_category }
       else
         format.html { render :new }
@@ -43,9 +53,10 @@ class SubCategoriesController < ApplicationController
   # PATCH/PUT /sub_categories/1
   # PATCH/PUT /sub_categories/1.json
   def update
+    @category = Category.where("category_active != false")
     respond_to do |format|
       if @sub_category.update(sub_category_params)
-        format.html { redirect_to @sub_category, notice: 'Sub category was successfully updated.' }
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :ok, location: @sub_category }
       else
         format.html { render :edit }
@@ -57,11 +68,9 @@ class SubCategoriesController < ApplicationController
   # DELETE /sub_categories/1
   # DELETE /sub_categories/1.json
   def destroy
-    @sub_category.destroy
-    respond_to do |format|
-      format.html { redirect_to sub_categories_url, notice: 'Sub category was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    sub_category = SubCategory.find(params[:id])
+    sub_category.update_attribute(:sub_categ_active, false)
+    redirect_to sub_categories_path
   end
 
   private

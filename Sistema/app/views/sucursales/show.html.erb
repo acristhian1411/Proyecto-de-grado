@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Suc descrip:</strong>
+  <%= @sucursale.suc_descrip %>
+</p>
+
+<p>
+  <strong>Suc activo:</strong>
+  <%= @sucursale.suc_activo %>
+</p>
+
+<%= link_to 'Edit', edit_sucursale_path(@sucursale) %> |
+<%= link_to 'Back', sucursales_path %>

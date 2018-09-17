@@ -11,4 +11,5 @@
 
 class Category < ApplicationRecord
 	has_many :sub_category
+	has_many :producto
 end

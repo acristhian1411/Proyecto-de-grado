@@ -14,4 +14,4 @@
 //= require activestorage
 //= require turbolinks
 //= require_relative select2.js
-//= require_tree .
+//= require_tree.

@@ -1,10 +1,13 @@
 class MarcasController < ApplicationController
   before_action :set_marca, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
 
   # GET /marcas
   # GET /marcas.json
   def index
-    @marcas = Marca.all
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+
     if params[:marca_descrip].present?
         @marcas = @marcas.where("marca_descrip ILIKE ?", "%#{params[:marca_descrip]}%")
     end
@@ -31,7 +34,7 @@ class MarcasController < ApplicationController
 
     respond_to do |format|
       if @marca.save
-        format.html { redirect_to @marca, notice: 'Marca was successfully created.' }
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :created, location: @marca }
       else
         format.html { render :new }
@@ -45,7 +48,7 @@ class MarcasController < ApplicationController
   def update
     respond_to do |format|
       if @marca.update(marca_params)
-        format.html { redirect_to @marca, notice: 'Marca was successfully updated.' }
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :ok, location: @marca }
       else
         format.html { render :edit }
@@ -57,11 +60,9 @@ class MarcasController < ApplicationController
   # DELETE /marcas/1
   # DELETE /marcas/1.json
   def destroy
-    @marca.destroy
-    respond_to do |format|
-      format.html { redirect_to marcas_url, notice: 'Marca was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    marca = Marca.find(params[:id])
+    marca.update_attribute(:marca_active, false)
+    redirect_to marcas_path
   end
 
   private

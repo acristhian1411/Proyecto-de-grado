@@ -9,15 +9,25 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body>    
+
+ <% if current_user %> 
 
     <ul>
-
       <li><%= link_to 'Categorias', categories_path %></li>
       <li><%= link_to 'Sub Categorias', sub_categories_path %></li>
       <li><%= link_to 'Marcas', marcas_path %></li>
-
+      <li><%= link_to 'Proveedores', proveedores_path %></li>
+      <li><%= link_to 'Productos', productos_path %></li>
+      <li><%= link_to 'Sucursales', sucursales_path %></li>
+       <li><%= link_to "Salir ", destroy_user_session_path, method: :delete%></li>
     </ul>
+
+<% else %>    
+
+<%= link_to "Log in", new_user_session_path %>
+
+<% end %>
 
     <%= yield %>
   </body>

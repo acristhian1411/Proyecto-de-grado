@@ -1,0 +1,27 @@
+<%= form_with(model: sucursale, local: true) do |form| %>
+  <% if sucursale.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sucursale.errors.count, "error") %> prohibited this sucursale from being saved:</h2>
+
+      <ul>
+      <% sucursale.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :suc_descrip %>
+    <%= form.text_field :suc_descrip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :suc_activo %>
+    <%= form.check_box :suc_activo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -22,11 +22,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id %>
+    <%= form.label :category_id %><br>
+    <%= select_tag"sub_category[category_id]",  options_for_select(@category.map{|c|["#{c.category_descrip}", c.id]}), id:"category_id" %>  
   </div>
+ 
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+              $(document).ready(function() {
+                  $('select#category_id').select2();
+                });
+</script>

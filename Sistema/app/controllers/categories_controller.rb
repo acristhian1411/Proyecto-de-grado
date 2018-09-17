@@ -1,10 +1,13 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+  
     if params[:category_descrip].present?
         @categories = @categories.where("category_descrip ILIKE ?", "%#{params[:category_descrip]}%")
     end
@@ -31,7 +34,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -45,7 +48,7 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -57,11 +60,9 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    category = Category.find(params[:id])
+    category.update_attribute(:category_active, false)
+    redirect_to categories_path
   end
 
   private
