@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Category descrip:</strong>
+  <strong>Descripcion:</strong>
   <%= @category.category_descrip %>
 </p>
 
 <p>
-  <strong>Category active:</strong>
-  <%= @category.category_active %>
+  <strong>Acrivo:</strong>
+  <% if @category.category_active == true %>
+  	Activo
+  <% else %>
+  	Inactivo
+  <% end %>
+
 </p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Editar', edit_category_path(@category) %> |
+<%= link_to 'Atras', categories_path %>

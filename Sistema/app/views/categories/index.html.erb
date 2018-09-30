@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Categories</h1>
+<h1>Categorias</h1>
                       <!-- formulario de busqueda -->
   <%= form_tag categories_path, method: :get do %>
       <div class="form-group">
@@ -12,8 +12,8 @@
 <table>
   <thead>
     <tr>
-      <th>Category descrip</th>
-      <th>Category active</th>
+      <th>Categoria</th>
+      <th>Activo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,10 +22,14 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.category_descrip %></td>
-        <td><%= category.category_active %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if category.category_active == true %>
+          <td>Activo</td>
+        <% else %>
+          <td>Inactivo</td>
+        <% end %>
+        <td><%= link_to 'Mostrar', category %></td>
+        <td><%= link_to 'Editar', edit_category_path(category) %></td>
+        <td><%= link_to 'Eliminar', category, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to 'Nueva Categoria', new_category_path %>

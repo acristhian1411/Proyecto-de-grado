@@ -12,8 +12,8 @@
 <table>
   <thead>
     <tr>
-      <th>Marca descrip</th>
-      <th>Marca active</th>
+      <th>Descripcion</th>
+      <th>Activo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,10 +22,14 @@
     <% @marcas.each do |marca| %>
       <tr>
         <td><%= marca.marca_descrip %></td>
-        <td><%= marca.marca_active %></td>
-        <td><%= link_to 'Show', marca %></td>
-        <td><%= link_to 'Edit', edit_marca_path(marca) %></td>
-        <td><%= link_to 'Destroy', marca, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if marca.marca_active == true %>
+          <td>Activo</td>
+        <% else %>
+          <td>Activo</td>
+        <% end %>
+        <td><%= link_to 'Mostrar', marca %></td>
+        <td><%= link_to 'Editar', edit_marca_path(marca) %></td>
+        <td><%= link_to 'Eliminar', marca, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +37,4 @@
 
 <br>
 
-<%= link_to 'New Marca', new_marca_path %>
+<%= link_to 'Nueva Marca', new_marca_path %>

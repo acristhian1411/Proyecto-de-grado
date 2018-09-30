@@ -12,16 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :marca_descrip %>
+    <%= form.label "Descripcion" %>
     <%= form.text_field :marca_descrip %>
   </div>
 
-  <div class="field">
-    <%= form.label :marca_active %>
-    <%= form.check_box :marca_active %>
-  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Guardar' %>
   </div>
 <% end %>
