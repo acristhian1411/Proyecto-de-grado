@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :clientes
+  resources :barrios
+  resources :ciudades
   get 'stock/index'
   get 'home/inicio'
   root 'home#inicio'
