@@ -10,16 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_030346) do
+ActiveRecord::Schema.define(version: 2018_10_12_021818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "barrios", force: :cascade do |t|
+    t.string "descripcion"
+    t.boolean "activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "category_descrip"
     t.boolean "category_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ciudades", force: :cascade do |t|
+    t.string "descripcion"
+    t.boolean "activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ciudads", force: :cascade do |t|
+    t.string "ciu_descrip"
+    t.boolean "ciu_activo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clientes", force: :cascade do |t|
+    t.string "nombre"
+    t.string "apellido"
+    t.string "n_cedula"
+    t.string "cli_telefono"
+    t.integer "limite_credito"
+    t.boolean "cli_activo"
+    t.bigint "ciudades_id"
+    t.bigint "barrio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["barrio_id"], name: "index_clientes_on_barrio_id"
+    t.index ["ciudades_id"], name: "index_clientes_on_ciudades_id"
   end
 
   create_table "marcas", force: :cascade do |t|
@@ -93,6 +129,8 @@ ActiveRecord::Schema.define(version: 2018_09_17_030346) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "clientes", "barrios"
+  add_foreign_key "clientes", "ciudades", column: "ciudades_id"
   add_foreign_key "productos", "marcas"
   add_foreign_key "productos", "proveedores"
   add_foreign_key "productos", "sub_categories"

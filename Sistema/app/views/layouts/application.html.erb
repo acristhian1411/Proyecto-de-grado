@@ -20,10 +20,14 @@
       <li><%= link_to 'Proveedores', proveedores_path %></li>
       <li><%= link_to 'Productos', productos_path %></li>
       <li><%= link_to 'Sucursales', sucursales_path %></li>
+      <li><%= link_to 'Ciudades', ciudades_path %></li>
+      <li><%= link_to 'Barrios', barrios_path %></li>
+      <li><%= link_to 'Clientes', clientes_path %></li>
        <li><%= link_to "Salir ", destroy_user_session_path, method: :delete%></li>
     </ul>
 
-<% else %>    
+<% else %> 
+   
 
 <%= link_to "Log in", new_user_session_path %>
 

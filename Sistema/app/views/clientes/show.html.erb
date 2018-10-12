@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @cliente.nombre %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @cliente.apellido %>
+</p>
+
+<p>
+  <strong>N cedula:</strong>
+  <%= @cliente.n_cedula %>
+</p>
+
+<p>
+  <strong>Cli telefono:</strong>
+  <%= @cliente.cli_telefono %>
+</p>
+
+<p>
+  <strong>Limite credito:</strong>
+  <%= @cliente.limite_credito %>
+</p>
+
+<p>
+  <strong>Cli activo:</strong>
+  <%= @cliente.cli_activo %>
+</p>
+
+<p>
+  <strong>Ciudades:</strong>
+  <%= @cliente.ciudades %>
+</p>
+
+<p>
+  <strong>Barrio:</strong>
+  <%= @cliente.barrio %>
+</p>
+
+<%= link_to 'Edit', edit_cliente_path(@cliente) %> |
+<%= link_to 'Back', clientes_path %>
