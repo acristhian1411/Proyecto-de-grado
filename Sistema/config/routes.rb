@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :marcas
   resources :sub_categories
   resources :categories
+  get 'sucursales/subCateg_lst', as: 'subCateg_lst'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

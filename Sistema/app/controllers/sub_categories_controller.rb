@@ -73,6 +73,15 @@ class SubCategoriesController < ApplicationController
     redirect_to sub_categories_path
   end
 
+  def subCateg_lst
+    # se obtiene los datos necesarios del modelo 
+    @sub_categories = SubCategory.select("id,sub_categ_descrip,category_id").where("category_id = ?", params[:category_id])
+    # se define la salida en formato json 
+    respond_to do |format|
+    format.json { render :json => @sub_categories } # render convierte los datos de estado a el formato json
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sub_category

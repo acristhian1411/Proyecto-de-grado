@@ -1,14 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Marca descrip:</strong>
+  <strong>Descripcion:</strong>
   <%= @marca.marca_descrip %>
 </p>
 
 <p>
-  <strong>Marca active:</strong>
-  <%= @marca.marca_active %>
+  <strong>Activo:</strong>
+  <% if @marca.marca_active == true %>
+  	Activo
+  <% else %>
+  	Inactivo
+  <% end %>
+
 </p>
 
-<%= link_to 'Edit', edit_marca_path(@marca) %> |
-<%= link_to 'Back', marcas_path %>
+<%= link_to 'Editar', edit_marca_path(@marca) %> |
+<%= link_to 'Atras', marcas_path %>

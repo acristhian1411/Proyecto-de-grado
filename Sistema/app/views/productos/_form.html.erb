@@ -12,36 +12,83 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :prod_descrip %>
+    <%= form.label "Descripcion" %>
     <%= form.text_field :prod_descrip %>
   </div>
 
   <div class="field">
     <%= form.label :iva %>
-    <%= form.number_field :iva %>
+    <%= form.select :iva,  options_for_select(['5', '10']) %>
   </div>
 
   <div class="field">
-    <%= form.label :prod_active %>
-    <%= form.check_box :prod_active %>
+    <%= form.label "Proveedor" %>
+    <%= select_tag"producto[proveedore_id]",  options_for_select(@proveedores.map{|m|["#{m.razon_social}", m.id]}), id:"proveedore_id" %>  
   </div>
 
   <div class="field">
-    <%= form.label :proveedore_id %>
-    <%= form.text_field :proveedore_id %>
+    <%= form.label "Marca" %>
+    <%= select_tag"producto[marca_id]",  options_for_select(@marcas.map{|m|["#{m.marca_descrip}", m.id]}), id:"marca_id" %>  
   </div>
 
   <div class="field">
-    <%= form.label :marca_id %>
-    <%= form.text_field :marca_id %>
+    <%= form.label "Categoria" %>
+    <%= select_tag"producto[category_id]",  options_for_select(@categories.map{|m|["#{m.category_descrip}", m.id]}), id:"category_cmb" %>  
   </div>
 
-  <div class="field">
-    <%= form.label :sub_category_id %>
-    <%= form.text_field :sub_category_id %>
+
+<div>
+<%= form.label :sub_category_id %><br> 
+<%= form.select :sub_category_id, '<option value="">SubCategories</option>' %><br>
+    <%= form.label "Sub Categoria" %>
+    <%= select_tag"producto[sub_category_id]",  options_for_select(@sub_categories.map{|m|["#{m.sub_categ_descrip}", m.id]}), id:"sub_category_id" %>  
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Guardar' %>
   </div>
 <% end %>
+
+
+<script>
+              $(document).ready(function() {
+                  $('select#marca_id').select2();
+                });
+</script>
+
+<script>
+$('#category_cmb').change(function() { // selecciona el select de paises y asigna el evento change, que el activarse ejectuara la funcion que contiene
+    $.get ('<%= subCateg_lst_path %>.json', 
+{
+category_id: $("#category_cmb option:selected").val() //asigna la variable paise_id a la url, el valor lo obtiene del combo paise
+}).done ( 
+    function(data) 
+          {
+          $('#category_sub_category_id option').remove(); 
+
+          $("<option />").attr({'value':"" }).text( "Seleccione"
+          ).appendTo("#category_sub_category_id") ; 
+
+          $.each(data, function (key, obj) // itera los datos key es
+          {
+          $("<option />").attr({
+          'value':obj.id,
+          }).text( obj.sub_categ_descrip ).appendTo
+
+          ("#category_sub_category_id") }
+
+//agrega uno por uno los datos de al select de estado
+
+)
+}
+
+)
+})
+</script>
+
+<script type="text/javascript">
+   if (jQuery) {
+     alert("jQuery esta cargado");
+} else {
+      alert("jQuery no esta cargado");
+}</script>

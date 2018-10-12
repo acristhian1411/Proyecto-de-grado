@@ -11,4 +11,6 @@
 
 class Sucursale < ApplicationRecord
 	has_many :stock
+	has_many :producto, through: :stock
+
 end

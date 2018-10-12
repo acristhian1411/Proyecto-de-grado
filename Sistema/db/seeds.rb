@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Sucursale.create(suc_activo: true, suc_descrip: 'CASA MATRIZ')
+Sucursale.create(suc_activo: true, suc_descrip: 'GRAL ARTIGAS')
+Sucursale.create(suc_activo: true, suc_descrip: 'RUTA 1')

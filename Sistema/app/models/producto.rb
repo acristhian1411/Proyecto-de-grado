@@ -29,5 +29,7 @@ class Producto < ApplicationRecord
   belongs_to :proveedore
   belongs_to :marca
   belongs_to :sub_category
+
+  has_many :sucursale, through: :stock
   has_many :stock
 end

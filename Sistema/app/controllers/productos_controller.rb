@@ -7,31 +7,57 @@ class ProductosController < ApplicationController
   # GET /productos.json
   def index
     @productos = Producto.where("prod_active != false").order("prod_descrip ASC")
-
+# inicio buscador
     if params[:prod_descrip].present?
         @productos = @productos.where("prod_descrip ILIKE ?", "%#{params[:prod_descrip]}%")
     end
+# fin buscador
+
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @proveedores = Proveedore.where("prov_activo != false").order("razon_social ASC")
+
+
   end
 
   # GET /productos/1
   # GET /productos/1.json
   def show
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @proveedores = Proveedore.where("prov_activo != false").order("razon_social ASC")
+
+    @stock = Stock.where("producto_id = ?", params[:producto_id])
+
   end
 
   # GET /productos/new
   def new
     @producto = Producto.new
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @proveedores = Proveedore.where("prov_activo != false").order("razon_social ASC")
   end
 
   # GET /productos/1/edit
   def edit
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @proveedores = Proveedore.where("prov_activo != false").order("razon_social ASC")
   end
 
   # POST /productos
   # POST /productos.json
   def create
     @producto = Producto.new(producto_params)
-
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @proveedores = Proveedore.where("prov_activo != false").order("razon_social ASC")
     respond_to do |format|
       if @producto.save
         format.html { redirect_to action: "index"}
@@ -46,6 +72,10 @@ class ProductosController < ApplicationController
   # PATCH/PUT /productos/1
   # PATCH/PUT /productos/1.json
   def update
+    @marcas = Marca.where("marca_active != false").order("marca_descrip ASC")
+    @categories = Category.where("category_active != false").order("category_descrip ASC")
+    @sub_categories = SubCategory.where("sub_categ_active != false").order("sub_categ_descrip ASC")
+    @proveedores = Proveedore.where("prov_activo != false").order("razon_social ASC")
     respond_to do |format|
       if @producto.update(producto_params)
         format.html { redirect_to action: "index"}

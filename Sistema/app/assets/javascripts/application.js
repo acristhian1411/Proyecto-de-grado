@@ -14,4 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require_relative select2.js
+//= require_relative jquery3.js
+//= require_relative jquery_ujs.js
 //= require_tree.

@@ -1,2 +1,36 @@
-<h1>Stock#index</h1>
-<p>Find me in app/views/stock/index.html.erb</p>
+<h1>Stock</h1>
+
+
+                      <!-- formulario de busqueda -->
+  <%= form_tag stock_index_path, method: :get do %>
+      <div class="form-group">
+          <%= text_field_tag :prod_descrip, params[:prod_descrip], class: "form-control", placeholder: "Descripcion" %>
+      </div>
+      <%= submit_tag "Buscar", name: nil, class: "btn btn-primary btn-md" %>
+  <% end %>
+                      <!-- fin formulario de busqueda -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Prod descrip</th>
+      <th>Iva</th>
+      <th>Prod active</th>
+      <th>Proveedore</th>
+      <th>Marca</th>
+      <th>Sub category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stock.each do |stock| %>
+      <tr>
+        <td><%= stock.producto.prod_descrip %></td>
+        <td><%= stock.sucursale.suc_descrip %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p></p>
